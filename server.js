@@ -85,11 +85,10 @@ io.on('connection', (socket) => {
   });
 });
 
-// استخدام المنفذ الديناميكي من البيئة (مهم للنشر السحابي)
-const PORT = process.env.PORT || 3001;
+// المنفذ المستخدم للنشر على SnapDeploy (يجب أن يكون 8080 أو يستخدم متغير البيئة)
+const PORT = process.env.PORT || 8080;
 server.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 LAN Server running on port ${PORT}`);
-  // لا حاجة لعرض IP المحلي في السحابة، لكن يمكن تركه
   const { networkInterfaces } = require('os');
   const nets = networkInterfaces();
   for (const name of Object.keys(nets)) {

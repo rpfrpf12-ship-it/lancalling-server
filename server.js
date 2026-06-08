@@ -38,7 +38,6 @@ io.on('connection', (socket) => {
       return;
     }
 
-    // التحقق من صحة التوكن
     if (!Expo.isExpoPushToken(pushToken)) {
       console.error(`❌ Invalid push token: ${pushToken}`);
       return;
@@ -62,7 +61,6 @@ io.on('connection', (socket) => {
     }
   });
 
-  // باقي الأحداث (private-message, call-offer, call-answer, ice-candidate, disconnect)
   socket.on('private-message', (data) => {
     console.log('💬 Message from:', data.from);
     socket.broadcast.emit('private-message', data);
@@ -88,6 +86,7 @@ io.on('connection', (socket) => {
   });
 });
 
+// المنفذ: استخدام متغير البيئة PORT (منصة السحابة) أو الرجوع إلى 8080
 const PORT = process.env.PORT || 8080;
 server.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 LAN Server running on port ${PORT}`);
